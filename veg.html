@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vegetable List from JSON</title>
+    <style>
+      body {
+        background: #f7fafc;
+        font-family: Arial, sans-serif;
+      }
+      .veg-table {
+        width: 80%;
+        margin: 40px auto;
+        border-collapse: collapse;
+        background: #fff;
+        box-shadow: 0 2px 8px #e2e8f0;
+      }
+      .veg-table th, .veg-table td {
+        border: 1px solid #e2e8f0;
+        padding: 12px;
+        text-align: left;
+      }
+      .veg-table th {
+        background: #38a169;
+        color: #fff;
+      }
+      .veg-img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align:center; margin-top:32px; color:#2f855a;">Vegetable List</h1>
+    <table class="veg-table" id="vegTable">
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Name</th>
+          <th>Price (₹/kg)</th>
+          <th>Available (kg)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data will be loaded here -->
+      </tbody>
+    </table>
+    <script>
+      // Example JSON data (replace with fetch if using external file)
+      const vegetables = [
+        { "name": "Beans","price":65	,"image": "./Images/beans.png","availableKg":	1	},
+{ "name": "Beetroot","price":37	,"image": "./Images/beetroot.png","availableKg":	1	},
+{ "name": "Bottle guard","price":30	,"image": "./Images/bottlegaurd.png","availableKg":	1	},
+{ "name": "Brinjal black","price":45	,"image": "./Images/brinjal_black.png","availableKg":	1	},
+{ "name": "Brinjal white","price":45	,"image": "./Images/green_brinjal.png","availableKg":	1	},
+{ "name": "Cabbage","price":22	,"image": "./Images/cabbage.png","availableKg":	1	},
+{ "name": "Capsicum","price":69	,"image": "./Images/capsicum.png","availableKg":	1	},
+{ "name": "Carrot","price":48	,"image": "./Images/carrot.png","availableKg":	1	},
+{ "name": "Cauliflower","price":26	,"image": "./Images/cauliflower.png","availableKg":	1	},
+{ "name": "Chilli","price":48	,"image": "./Images/green_chilli.png","availableKg":	1	},
+{ "name": "Cluster beans","price":50	,"image": "./Images/cluster_beans.png","availableKg":	1	},
+{ "name": "Donda kaya","price":45	,"image": "./Images/donda.png","availableKg":	1	},
+{ "name": "Dosakaya","price":30	,"image": "./Images/dosa_kaya.png","availableKg":	1	},
+{ "name": "Drum stick","price":105	,"image": "./Images/drumstick.png","availableKg":	1	},
+{ "name": "Keera","price":30	,"image": "./Images/keera.png","availableKg":	1	},
+{ "name": "Lady's finger","price":39	,"image": "./Images/ladys_finger.png","availableKg":	1	},
+{ "name": "Onion","price":24	,"image": "./Images/onions.png","availableKg":	1	},
+{ "name": "Potato","price":25	,"image": "./Images/potato.png","availableKg":	1	},
+{ "name": "Raddish","price":60	,"image": "./Images/raddish.png","availableKg":	1	},
+{ "name": "Raw banana","price":450	,"image": "./Images/raw_banana.png","availableKg":	1	},
+{ "name": "Raw mango","price":70	,"image": "./Images/raw_mango.png","availableKg":	1	},
+{ "name": "Spring onion","price":40	,"image": "./Images/spring_onions.png","availableKg":	1	},
+{ "name": "Tomato","price":22	,"image": "./Images/tomatoes.png","availableKg":	1	},
+{ "name": "Vilot brinjal","price":45	,"image": "./Images/violet_brinjal.png","availableKg":	1	},
+{ "name": "Banana","price":22	,"image": "./Images/banana.png","availableKg":	1	},
+{ "name": "Basil","price":200	,"image": "./Images/basil.png","availableKg":	1	},
+{ "name": "Broccoli","price":260	,"image": "./Images/broccolli.png","availableKg":	1	},
+{ "name": "Capsicum yellow","price":260	,"image": "./Images/yellow_capsicum.png","availableKg":	1	},
+{ "name": "Celery","price":170	,"image": "./Images/cellery.png","availableKg":	1	},
+{ "name": "Coconut","price":34	,"image": "./Images/coconut.png","availableKg":	1	},
+{ "name": "Garlic","price":90	,"image": "./Images/garlic.png","availableKg":	1	},
+{ "name": "Ginger","price":60	,"image": "./Images/ginger.png","availableKg":	1	},
+{ "name": "Ice burg Lettuce","price":150	,"image": "./Images/ice_berg_lettuce.png","availableKg":	1	},
+{ "name": "Lemon","price":60	,"image": "./Images/lemon.png","availableKg":	1	},
+{ "name": "Mushroom","price":200	,"image": "./Images/mushroom.png","availableKg":	1	},
+{ "name": "Peeled Garlic","price":110	,"image": "./Images/peeled_garlic.png","availableKg":	1	},
+{ "name": "Zuccuni green","price":180	,"image": "./Images/green_zucchini.png","availableKg":	1	},
+{ "name": "Zuccuni yellow","price":180	,"image": "./Images/yellow_zucchini.png","availableKg":	1	},
+{ "name": "Curry leaves","price":40	,"image": "./Images/curry_leaves.png","availableKg":	1	},
+{ "name": "Gongura","price":80	,"image": "./Images/gongura.png","availableKg":	1	},
+{ "name": "Kothimeera","price":80	,"image": "./Images/kothimeera.png","availableKg":	1	},
+{ "name": "Palak","price":100	,"image": "./Images/palak.png","availableKg":	1	},
+{ "name": "Pudhina","price":100	,"image": "./Images/pudina.png","availableKg":	1	}
+
+      ];
+
+      function renderTable(data) {
+        const tbody = document.querySelector("#vegTable tbody");
+        tbody.innerHTML = "";
+        data.forEach(veg => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td><img class="veg-img" src="${veg.image}" alt="${veg.name}"></td>
+            <td>${veg.name}</td>
+            <td>${veg.price}</td>
+            <td>${veg.availableKg}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      
+
+ //     If loading from external JSON file, use fetch:
+      fetch('vegetables.json')
+        .then(response => response.json())
+        .then(data => renderTable(data));
+
+      // For now, use local data
+      //renderTable(vegetables);
+    </script>
+  </body>
+</html>
