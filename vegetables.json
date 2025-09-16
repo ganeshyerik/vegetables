@@ -41,6 +41,6 @@
 { "name": "Gongura","price":500	,"image": "./Images/gongura.png","availableKg":	1	},
 { "name": "Kothimeera","price":70	,"image": "./Images/kothimeera.png","availableKg":	1	},
 { "name": "Palak","price":20	,"image": "./Images/palak.png","availableKg":	1	},
-{ "name": "Pudhina","price":0	,"image": "./Images/pudina.png","availableKg":	1	}
+{ "name": "Pudhina","price":120	,"image": "./Images/pudina.png","availableKg":	1	}
 
 ]
